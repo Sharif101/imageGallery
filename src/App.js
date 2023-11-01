@@ -1,8 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Gallery from "./Components/Gallery/Gallery";
 
 function App() {
-  return <div>image-gallery</div>;
+  return (
+    <div>
+      <Gallery />
+    </div>
+  );
 }
 
 export default App;
