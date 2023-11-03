@@ -4,25 +4,18 @@ import Singleimage from "../Singleimage";
 
 const Gallery = () => {
   const [selectedImages, setSelectedImages] = useState([]);
-  const [value, setVaule] = useState("");
-  const [url, setUrl] = useState("");
-  // console.log(url);
+  const [url, setUrl] = useState([]);
 
   const onSelectFile = (e) => {
     const seletedFiles = e.target.files;
     const selectFilesArray = Array.from(seletedFiles);
-    // console.log(selectFilesArray);
 
     const imageArray = selectFilesArray.map((file) => {
       return URL.createObjectURL(file);
     });
-    // console.log(imageArray);
     setSelectedImages(imageArray);
   };
 
-  // const handleDelete = (id) => {
-  //   setVaule(id);
-  // };
   const handleDelete = (image) => {
     setSelectedImages(selectedImages.filter((e) => e !== image));
     URL.revokeObjectURL(image);
@@ -30,18 +23,21 @@ const Gallery = () => {
 
   return (
     <div className="container">
-      {url.length !== 0 && (
-        <button onClick={() => handleDelete(url)}>delete</button>
-      )}
+      <h3 className="title">Image-Gallery</h3>
+      <hr className="border" />
+      <div className="showDlt">
+        {url.length > 0 && <p>{url.length} seleted files</p>}
+        {url.length !== 0 && (
+          <button className="btn" onClick={() => handleDelete(url)}>
+            delete
+          </button>
+        )}
+      </div>
+
       <div className="images">
         {selectedImages &&
           selectedImages.map((image, id) => (
-            <Singleimage
-              image={image}
-              id={id + 1}
-              // handleDelete={handleDelete}
-              setUrl={setUrl}
-            />
+            <Singleimage image={image} id={id + 1} setUrl={setUrl} />
           ))}
         <label>
           + Add Images
