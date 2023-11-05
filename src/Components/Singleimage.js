@@ -1,6 +1,6 @@
 import React from "react";
 
-const Singleimage = ({ image, id, setUrl }) => {
+const Singleimage = ({ image, id, setUrl, cunter }) => {
   return (
     <>
       <div key={image} className="image">
@@ -10,7 +10,11 @@ const Singleimage = ({ image, id, setUrl }) => {
           name=""
           id=""
           className="check"
-          onChange={() => setUrl(image)}
+          value={image}
+          onChange={() => {
+            setUrl(image);
+            cunter(image);
+          }}
         />
       </div>
     </>

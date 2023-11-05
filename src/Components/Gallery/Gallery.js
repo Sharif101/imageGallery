@@ -5,6 +5,7 @@ import Singleimage from "../Singleimage";
 const Gallery = () => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [url, setUrl] = useState([]);
+  const [check, setCheck] = useState([]);
 
   const onSelectFile = (e) => {
     const seletedFiles = e.target.files;
@@ -21,13 +22,19 @@ const Gallery = () => {
     URL.revokeObjectURL(image);
   };
 
+  const cunter = (e) => {
+    if (e) {
+      setCheck((pre) => [...pre, e]);
+    }
+  };
+
   return (
     <div className="container">
       <h3 className="title">Image-Gallery</h3>
       <hr className="border" />
       <div className="showDlt">
-        {url.length > 0 && <p>{url.length} seleted files</p>}
-        {url.length !== 0 && (
+        {check.length > 0 && <p>{check.length} seleted files</p>}
+        {check.length > 0 && (
           <button className="btn" onClick={() => handleDelete(url)}>
             delete
           </button>
@@ -37,7 +44,12 @@ const Gallery = () => {
       <div className="images">
         {selectedImages &&
           selectedImages.map((image, id) => (
-            <Singleimage image={image} id={id + 1} setUrl={setUrl} />
+            <Singleimage
+              image={image}
+              id={id + 1}
+              setUrl={setUrl}
+              cunter={cunter}
+            />
           ))}
         <label>
           + Add Images
